@@ -46,7 +46,7 @@ class EmployeeViewModel : ViewModel() {
     fun updateEmployee(empCode: String, employee: Employee) {
         viewModelScope.launch {
             try {
-                val result = api.updateEmployee(empCode)
+                val result = api.updateEmployee(empCode, employee)
                 responseMessage.postValue("Employee Updated: ${result.empCode}")
                 fetchAllEmployees()
             } catch (e: Exception) {

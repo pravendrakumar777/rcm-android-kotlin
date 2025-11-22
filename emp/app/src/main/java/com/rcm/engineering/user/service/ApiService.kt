@@ -25,6 +25,7 @@ interface ApiService {
     suspend fun deleteEmployee(@Path("id") id: Long): String
 
     @PUT("/api/employees/update/{empCode}")
-    suspend fun updateEmployee(@Path("empCode") empCode: String): Employee
+    suspend fun updateEmployee(@Path("empCode") empCode: String, @Body employee: Employee): Employee
+
 
 }
