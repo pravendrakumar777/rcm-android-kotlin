@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- NAME -->
+        <TextView
+            android:id="@+id/labelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@id/labelName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelName"/>
+
+        <!-- EMP CODE -->
+        <TextView
+            android:id="@+id/labelEmpCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelName"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvEmpCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelEmpCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelEmpCode"/>
+
+        <!-- EMAIL -->
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelEmpCode"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelEmail"/>
+
+        <!-- MOBILE -->
+        <TextView
+            android:id="@+id/labelMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelEmail"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelMobile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelMobile"/>
+
+        <!-- GENDER -->
+        <TextView
+            android:id="@+id/labelGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelMobile"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvGender"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelGender"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelGender"/>
+
+        <!-- MANAGER -->
+        <TextView
+            android:id="@+id/labelManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manager :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelGender"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvManager"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelManager"/>
+
+        <!-- DESIGNATION -->
+        <TextView
+            android:id="@+id/labelDesignation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Designation :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelManager"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvDesignation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelDesignation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelDesignation"/>
+
+        <!-- DEPARTMENT -->
+        <TextView
+            android:id="@+id/labelDepartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Department :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelDesignation"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvDepartment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelDepartment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelDepartment"/>
+
+        <!-- DOB -->
+        <TextView
+            android:id="@+id/labelDob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOB :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelDepartment"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvDob"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelDob"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelDob"/>
+
+        <!-- ADDRESS -->
+        <TextView
+            android:id="@+id/labelAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelDob"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelAddress"/>
+
+        <!-- DOJ -->
+        <TextView
+            android:id="@+id/labelDateOfJoining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOJ :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelAddress"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvDateOfJoining"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelDateOfJoining"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelDateOfJoining"/>
+
+        <!-- EDIT BUTTON -->
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/tvDateOfJoining"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnDelete"/>
+
+        <!-- DROP BUTTON -->
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Drop"
+            android:textAllCaps="false"
+            android:backgroundTint="#E53935"
+            android:textColor="#FFFFFF"
+            android:enabled="false"
+            android:alpha="0.5"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tvDateOfJoining"
+            app:layout_constraintStart_toEndOf="@id/btn"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
