@@ -304,6 +304,201 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/labelSalary"/>
 
+        <!-- City -->
+        <TextView
+            android:id="@+id/labelCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelSalary"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelCity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelCity"/>
+
+
+        <!-- State -->
+        <TextView
+            android:id="@+id/labelState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelCity"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvState"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelState"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelState"/>
+
+        <!-- Country -->
+        <TextView
+            android:id="@+id/labelCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Country :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelState"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvCountry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelCountry"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelCountry"/>
+
+        <!-- Pan Number -->
+        <TextView
+            android:id="@+id/labelPanNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pan Number :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelCountry"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvPanNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelPanNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelPanNumber"/>
+
+        <!-- Aadhaar Number -->
+        <TextView
+            android:id="@+id/labelAadhaarNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aadhaar Number :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelPanNumber"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvAadhaarNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelAadhaarNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelAadhaarNumber"/>
+
+
+        <!-- Bank Name -->
+        <TextView
+            android:id="@+id/labelBankName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bank Name :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelAadhaarNumber"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvBankName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelBankName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelBankName"/>
+
+        <!-- Account Number -->
+        <TextView
+            android:id="@+id/labelBankAccountNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Number :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelBankName"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvBankAccountNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelBankAccountNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelBankAccountNumber"/>
+
+
+        <!-- IFSC CODE -->
+        <TextView
+            android:id="@+id/labelIfscCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IFSC CODE :"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelBankAccountNumber"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvIfscCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelIfscCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelIfscCode"/>
+
         <!-- EDIT BUTTON -->
         <Button
             android:id="@+id/btn"
@@ -315,7 +510,7 @@
             android:textColor="#FFFFFF"
             android:enabled="false"
             android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/tvSalary"
+            app:layout_constraintTop_toBottomOf="@id/tvIfscCode"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnDelete"/>
 
@@ -332,7 +527,7 @@
             android:alpha="0.5"
             android:layout_marginTop="12dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintTop_toBottomOf="@id/tvSalary"
+            app:layout_constraintTop_toBottomOf="@id/tvIfscCode"
             app:layout_constraintStart_toEndOf="@id/btn"
             app:layout_constraintEnd_toEndOf="parent"/>
 

@@ -16,5 +16,15 @@ data class Employee(
     val department: String,
     val designation: String,
     val empCode: String,
-    val salary: String
+    val salary: String,
+    //
+    val city: String,
+    val state: String,
+    val country: String,
+    val panNumber: String,
+    val aadhaarNumber: String,
+    val bankName: String,
+    val bankAccountNumber: String,
+    val ifscCode: String
+
 ) : Serializable

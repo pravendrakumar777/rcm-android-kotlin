@@ -20,7 +20,10 @@ class EmployeeViewModel : ViewModel() {
             try {
                 val response: Response<List<Employee>> = api.fetchAllEmployee()
                 if (response.isSuccessful) {
-                    users.postValue(response.body() ?: emptyList())
+                    val list = response.body() ?: emptyList()
+                    val sortedList = list.sortedByDescending { it.id }
+                    users.postValue(sortedList)
+                    //users.postValue(response.body() ?: sortedList)
                 } else {
                     error.postValue("Error: ${response.code()}")
                 }

@@ -1,10 +1,13 @@
 package com.rcm.engineering.user.activities
 
+import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -24,17 +27,25 @@ class CreateEmployeeActivity : AppCompatActivity() {
         binding = ActivityCreateEditEmployeeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val managerList = listOf("Select Manager", "Chandra Veer", "Kishan Kumar", "Pravendra Kumar", "Manish Rajput", "Kamlendra Kumar")
+        binding.etDateOfBirth.setOnClickListener {
+            showDatePicker(binding.etDateOfBirth)
+        }
+
+        binding.etDateOfJoining.setOnClickListener {
+            showDatePicker(binding.etDateOfJoining)
+        }
+
+        val managerList = listOf("Select Manager", "Chandra Veer", "Kishan Kumar", "Pravendra Kumar", "Manish Kumar", "Kamlendra Kumar")
         val designationsList = listOf("Select Designations", "Production Assistant", "Accounts Manager", "Senior Traub Setter", "Traub Machine Specialist", "Quality Analyst", "Production & Logistics Executive")
         val departmentsList = listOf("Select Departments", "Production", "Engineering", "Quality Control", "Finance & Accounts", "Logistics & Dispatch")
 
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, managerList)
+        val spinnerAdapterForManagers = ArrayAdapter(this, android.R.layout.simple_spinner_item, managerList)
         val spinnerAdapterForDesignations = ArrayAdapter(this, android.R.layout.simple_spinner_item, designationsList)
         val spinnerAdapterForDepartments = ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentsList)
 
         // Managers
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spManager.adapter = spinnerAdapter
+        spinnerAdapterForManagers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spManager.adapter = spinnerAdapterForManagers
 
         var selectedManager = ""
         binding.spManager.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -49,9 +60,9 @@ class CreateEmployeeActivity : AppCompatActivity() {
         binding.spDesignations.adapter = spinnerAdapterForDesignations
 
         var selectedDesignations = ""
-        binding.spManager.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.spDesignations.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                selectedManager = designationsList[position]
+                selectedDesignations = designationsList[position]
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
@@ -76,8 +87,6 @@ class CreateEmployeeActivity : AppCompatActivity() {
             binding.etEmail.setText(ingEmployee!!.email)
             binding.etMobile.setText(ingEmployee!!.mobile)
             binding.etGender.setText(ingEmployee!!.gender)
-            binding.etDateOfBirth.setText(ingEmployee!!.dateOfBirth)
-            binding.etDateOfJoining.setText(ingEmployee!!.dateOfJoining)
             binding.etAddress.setText(ingEmployee!!.address)
             binding.etPostalCode.setText(ingEmployee!!.postalCode)
             binding.etEmpCode.visibility = View.VISIBLE
@@ -96,13 +105,21 @@ class CreateEmployeeActivity : AppCompatActivity() {
             val mobile = binding.etMobile.text.toString().trim()
             val gender = binding.etGender.text.toString().trim()
             val manager = selectedManager
-            val dateOfBirth = convertToApiFormat(binding.etDateOfBirth.text.toString().trim())
-            val dateOfJoining = convertToApiFormat(binding.etDateOfJoining.text.toString().trim())
+            val dateOfBirth = binding.etDateOfBirth.text.toString().trim()
+            val dateOfJoining = binding.etDateOfJoining.text.toString().trim()
             val address = binding.etAddress.text.toString().trim()
             val postalCode = binding.etPostalCode.text.toString().trim()
             val department = selectedDepartments
             val designation = selectedDesignations
             val salary = binding.etSalary.text.toString().trim()
+            val city = binding.etCity.text.toString().trim()
+            val state = binding.etState.text.toString().trim()
+            val country = binding.etCountry.text.toString().trim()
+            val panNumber = binding.etPanNumber.text.toString().trim()
+            val aadhaarNumber = binding.etAadhaarNumber.text.toString().trim()
+            val bankAccountNumber = binding.etBankAccountNumber.text.toString().trim()
+            val bankName = binding.etBankName.text.toString().trim()
+            val ifscCode = binding.etIfscCode.text.toString().trim()
 
             if (manager == "Select Manager") {
                 Toast.makeText(this, "Please select Manager", Toast.LENGTH_SHORT).show()
@@ -139,7 +156,16 @@ class CreateEmployeeActivity : AppCompatActivity() {
                 department = department,
                 designation = designation,
                 empCode = empCode,
-                salary = salary
+                salary = salary,
+                city = city,
+                state = state,
+                country = country,
+                panNumber = panNumber,
+                aadhaarNumber = aadhaarNumber,
+                bankName = bankName,
+                bankAccountNumber = bankAccountNumber,
+                ifscCode = ifscCode
+
             )
 
             if (ingEmployee == null) vm.createUser(employee)
@@ -157,5 +183,16 @@ class CreateEmployeeActivity : AppCompatActivity() {
         } catch (e: Exception) {
             date
         }
+    }
+
+    private fun showDatePicker(target: EditText) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        DatePickerDialog(this, { _, y, m, d ->
+            val formatted = String.format("%02d-%02d-%04d", d, m + 1, y)
+            target.setText(formatted)
+        }, year, month, day).show()
     }
 }
