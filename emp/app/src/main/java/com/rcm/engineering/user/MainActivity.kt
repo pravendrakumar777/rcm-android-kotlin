@@ -51,6 +51,10 @@ class MainActivity : AppCompatActivity() {
             binding.tvEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
         }
 
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+
         vm.error.observe(this) { err -> Toast.makeText(this, err, Toast.LENGTH_SHORT).show() }
         vm.responseMessage.observe(this) { msg -> Toast.makeText(this, msg, Toast.LENGTH_SHORT).show() }
 

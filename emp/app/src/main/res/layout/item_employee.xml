@@ -44,7 +44,7 @@
             android:id="@+id/labelEmpCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Code :"
+            android:text="EMP ID :"
             android:textStyle="bold"
             android:textColor="#263238"
             android:layout_marginTop="8dp"
