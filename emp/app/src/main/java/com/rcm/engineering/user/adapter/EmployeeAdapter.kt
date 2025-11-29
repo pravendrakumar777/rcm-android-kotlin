@@ -1,10 +1,12 @@
 package com.rcm.engineering.user.adapter
 
+import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rcm.engineering.user.databinding.ItemEmployeeBinding
 import com.rcm.engineering.user.models.Employee
+import java.util.Locale
 
 class EmployeeAdapter(
     private var list: MutableList<Employee>,
@@ -32,14 +34,26 @@ class EmployeeAdapter(
         holder.binding.tvDesignation.text = user.designation
         holder.binding.tvDepartment.text = user.department
         holder.binding.tvAddress.text = user.address
-        holder.binding.tvDob.text = user.dateOfBirth
         holder.binding.tvManager.text = user.manager
-        holder.binding.tvDateOfJoining.text = user.dateOfJoining
+        holder.binding.tvDob.text = formatDate(user.dateOfBirth)
+        holder.binding.tvDateOfJoining.text = formatDate(user.dateOfJoining)
         holder.binding.tvEmpCode.text = user.empCode
+        holder.binding.tvSalary.text = user.salary
 
         holder.binding.btn.setOnClickListener { on(user) }
         holder.binding.btnDelete.setOnClickListener { onDelete(user) }
     }
+
+    private fun formatDate(dateString: String): String {
+        return try {
+            val input = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val output = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            output.format(input.parse(dateString)!!)
+        } catch (e: Exception) {
+            dateString
+        }
+    }
+
 
     override fun getItemCount(): Int = list.size
 

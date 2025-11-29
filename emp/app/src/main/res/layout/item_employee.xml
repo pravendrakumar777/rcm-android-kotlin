@@ -279,6 +279,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/labelDateOfJoining"/>
 
+
+        <!-- Salary -->
+        <TextView
+            android:id="@+id/labelSalary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salary (₹):"
+            android:textStyle="bold"
+            android:textColor="#263238"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelDateOfJoining"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvSalary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#37474F"
+            app:layout_constraintStart_toEndOf="@id/labelSalary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/labelSalary"/>
+
         <!-- EDIT BUTTON -->
         <Button
             android:id="@+id/btn"
@@ -288,8 +313,9 @@
             android:textAllCaps="false"
             android:backgroundTint="#4CAF50"
             android:textColor="#FFFFFF"
+            android:enabled="false"
             android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/tvDateOfJoining"
+            app:layout_constraintTop_toBottomOf="@id/tvSalary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnDelete"/>
 
@@ -306,7 +332,7 @@
             android:alpha="0.5"
             android:layout_marginTop="12dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintTop_toBottomOf="@id/tvDateOfJoining"
+            app:layout_constraintTop_toBottomOf="@id/tvSalary"
             app:layout_constraintStart_toEndOf="@id/btn"
             app:layout_constraintEnd_toEndOf="parent"/>
 

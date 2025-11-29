@@ -15,5 +15,6 @@ data class Employee(
     val postalCode: String,
     val department: String,
     val designation: String,
-    val empCode: String
+    val empCode: String,
+    val salary: String
 ) : Serializable
