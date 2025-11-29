@@ -39,6 +39,14 @@ class EmployeeAdapter(
         holder.binding.tvDateOfJoining.text = formatDate(user.dateOfJoining)
         holder.binding.tvEmpCode.text = user.empCode
         holder.binding.tvSalary.text = user.salary
+        holder.binding.tvCity.text = user.city
+        holder.binding.tvState.text = user.state
+        holder.binding.tvCountry.text = user.country
+        holder.binding.tvPanNumber.text = user.panNumber
+        holder.binding.tvAadhaarNumber.text = user.aadhaarNumber
+        holder.binding.tvBankName.text = user.bankName
+        holder.binding.tvBankAccountNumber.text = user.bankAccountNumber
+        holder.binding.tvIfscCode.text = user.ifscCode
 
         holder.binding.btn.setOnClickListener { on(user) }
         holder.binding.btnDelete.setOnClickListener { onDelete(user) }

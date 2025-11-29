@@ -53,6 +53,13 @@ class MainActivity : AppCompatActivity() {
 
         vm.error.observe(this) { err -> Toast.makeText(this, err, Toast.LENGTH_SHORT).show() }
         vm.responseMessage.observe(this) { msg -> Toast.makeText(this, msg, Toast.LENGTH_SHORT).show() }
+
+        vm.users.observe(this) { list ->
+            adapter.setList(list)
+            binding.tvEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
+
+            binding.tvTotalEmployees.text = "Total Employees: ${list.size}"
+        }
     }
 
     override fun onResume() {
