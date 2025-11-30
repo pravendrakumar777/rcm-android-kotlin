@@ -35,9 +35,9 @@ class CreateEmployeeActivity : AppCompatActivity() {
             showDatePicker(binding.etDateOfJoining)
         }
 
-        val managerList = listOf("Select Manager", "Chandra Veer", "Kishan Kumar", "Pravendra Kumar", "Manish Kumar", "Kamlendra Kumar")
-        val designationsList = listOf("Select Designations", "Production Assistant", "Accounts Manager", "Senior Traub Setter", "Traub Machine Specialist", "Quality Analyst", "Production & Logistics Executive")
-        val departmentsList = listOf("Select Departments", "Production", "Engineering", "Quality Control", "Finance & Accounts", "Logistics & Dispatch")
+        val managerList = listOf("Managers", "Chandra Veer", "Kishan Kumar", "Pravendra Kumar", "Manish Kumar", "Kamlendra Kumar")
+        val designationsList = listOf("Designations", "Production Assistant", "Accounts Manager", "Senior Traub Setter", "Traub Machine Specialist", "Quality Analyst", "Production & Logistics Executive")
+        val departmentsList = listOf("Departments", "Production", "Engineering", "Quality Control", "Finance & Accounts", "Logistics & Dispatch")
 
         val spinnerAdapterForManagers = ArrayAdapter(this, android.R.layout.simple_spinner_item, managerList)
         val spinnerAdapterForDesignations = ArrayAdapter(this, android.R.layout.simple_spinner_item, designationsList)
@@ -79,6 +79,8 @@ class CreateEmployeeActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
+        binding.ivBack.setOnClickListener { finish() }
+
         vm = ViewModelProvider(this)[EmployeeViewModel::class.java]
         ingEmployee = intent.getSerializableExtra(MainActivity.EXTRA_EMPLOYEE) as? Employee
 
@@ -89,13 +91,13 @@ class CreateEmployeeActivity : AppCompatActivity() {
             binding.etGender.setText(ingEmployee!!.gender)
             binding.etAddress.setText(ingEmployee!!.address)
             binding.etPostalCode.setText(ingEmployee!!.postalCode)
-            binding.etEmpCode.visibility = View.VISIBLE
-            binding.etEmpCode.setText(ingEmployee!!.empCode)
-            binding.etEmpCode.isEnabled = false
+            //binding.etEmpCode.visibility = View.VISIBLE
+            //binding.etEmpCode.setText(ingEmployee!!.empCode)
+            //binding.etEmpCode.isEnabled = false
 
             binding.btnSave.text = "Update"
         } else {
-            binding.etEmpCode.visibility = View.GONE
+            //binding.etEmpCode.visibility = View.GONE
             binding.btnSave.text = "Save"
         }
 
@@ -121,17 +123,17 @@ class CreateEmployeeActivity : AppCompatActivity() {
             val bankName = binding.etBankName.text.toString().trim()
             val ifscCode = binding.etIfscCode.text.toString().trim()
 
-            if (manager == "Select Manager") {
+            if (manager == "Managers") {
                 Toast.makeText(this, "Please select Manager", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (designation == "Select Designations") {
+            if (designation == "Designations") {
                 Toast.makeText(this, "Please select Designations", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (department == "Select Departments") {
+            if (department == "Departments") {
                 Toast.makeText(this, "Please select Departments", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
