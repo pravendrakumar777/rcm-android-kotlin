@@ -35,9 +35,9 @@ class CreateEmployeeActivity : AppCompatActivity() {
             showDatePicker(binding.etDateOfJoining)
         }
 
-        val managerList = listOf("Managers", "Chandra Veer", "Kishan Kumar", "Pravendra Kumar", "Manish Kumar", "Kamlendra Kumar")
-        val designationsList = listOf("Designations", "Production Assistant", "Accounts Manager", "Senior Traub Setter", "Traub Machine Specialist", "Quality Analyst", "Production & Logistics Executive")
-        val departmentsList = listOf("Departments", "Production", "Engineering", "Quality Control", "Finance & Accounts", "Logistics & Dispatch")
+        val managerList = listOf("MANAGERS", "Chandra Veer", "Kishan Kumar", "Pravendra Kumar", "Manish Kumar", "Kamlendra Kumar")
+        val designationsList = listOf("DESIGNATIONS", "Production Assistant", "Accounts Manager", "Senior Traub Setter", "Traub Machine Specialist", "Quality Analyst", "Production & Logistics Executive")
+        val departmentsList = listOf("DEPARTMENTS", "Production", "Engineering", "Quality Control", "Finance & Accounts", "Logistics & Dispatch")
 
         val spinnerAdapterForManagers = ArrayAdapter(this, android.R.layout.simple_spinner_item, managerList)
         val spinnerAdapterForDesignations = ArrayAdapter(this, android.R.layout.simple_spinner_item, designationsList)
@@ -123,17 +123,17 @@ class CreateEmployeeActivity : AppCompatActivity() {
             val bankName = binding.etBankName.text.toString().trim()
             val ifscCode = binding.etIfscCode.text.toString().trim()
 
-            if (manager == "Managers") {
+            if (manager == "MANAGERS") {
                 Toast.makeText(this, "Please select Manager", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (designation == "Designations") {
+            if (designation == "DESIGNATIONS") {
                 Toast.makeText(this, "Please select Designations", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (department == "Departments") {
+            if (department == "DEPARTMENTS") {
                 Toast.makeText(this, "Please select Departments", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
