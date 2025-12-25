@@ -167,7 +167,6 @@ class CreateEmployeeActivity : AppCompatActivity() {
                 bankName = bankName,
                 bankAccountNumber = bankAccountNumber,
                 ifscCode = ifscCode
-
             )
 
             if (ingEmployee == null) vm.createUser(employee)
