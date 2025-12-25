@@ -8,9 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rcm.engineering.user.activities.AttendanceActivity
+import com.rcm.engineering.user.activities.ChallanListActivity
 import com.rcm.engineering.user.activities.CreateEmployeeActivity
 import com.rcm.engineering.user.activities.DashboardActivity
-import com.rcm.engineering.user.activities.ReportsActivity
 import com.rcm.engineering.user.activities.SettingsActivity
 import com.rcm.engineering.user.adapter.EmployeeAdapter
 import com.rcm.engineering.user.databinding.ActivityMainBinding
@@ -76,19 +76,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_attendance -> {
-                    //Toast.makeText(this, "Attendance clicked", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, AttendanceActivity::class.java))
                     true
                 }
                 R.id.nav_dashboard -> {
-                    //Toast.makeText(this, "Dashboard clicked", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, DashboardActivity::class.java))
                     true
                 }
 
                 R.id.nav_reports -> {
-                    Toast.makeText(this, "Reports clicked", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, ReportsActivity::class.java))
+                    startActivity(Intent(this, ChallanListActivity::class.java))
                     true
                 }
                 R.id.nav_profile -> {

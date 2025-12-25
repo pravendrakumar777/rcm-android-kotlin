@@ -1,5 +1,6 @@
 package com.rcm.engineering.user.service
 
+import com.rcm.engineering.user.models.Challan
 import com.rcm.engineering.user.models.Employee
 import com.rcm.engineering.user.response.AttendanceResponse
 import com.rcm.engineering.user.response.DashboardResponse
@@ -13,7 +14,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiService {
+interface ExternalAPIService {
 
     // CREATE USER
     @POST("/api/employees/create")
@@ -38,4 +39,7 @@ interface ApiService {
     suspend fun getAttendanceForEmployee(@Path("empCode") empCode: String): Response<AttendanceResponse>
 
     @GET("/api/attendance/dashboard") suspend fun getDashboard(): Response<DashboardResponse>
+
+    // Challan Reports
+    @GET("api/challans") fun getChallans(): Call<List<Challan>>
 }

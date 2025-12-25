@@ -22,10 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.rcm.engineering.user.activities.CreateEmployeeActivity"
-            android:exported="false" />
-        <activity android:name=".activities.AttendanceActivity" />
+        <activity android:name="com.rcm.engineering.user.activities.CreateEmployeeActivity" android:exported="false"/>
+        <activity android:name=".activities.AttendanceActivity"/>
         <activity android:name="com.rcm.engineering.user.activities.DashboardActivity"/>
-
+        <activity android:name="com.rcm.engineering.user.activities.ChallanListActivity"/>
     </application>
 </manifest>
