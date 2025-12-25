@@ -23,7 +23,7 @@
         android:id="@+id/tvPageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RCM Employees"
+        android:text="RCM ENGINEERING"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="#37474F"
@@ -89,10 +89,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_input_add"
-        android:contentDescription="Add Employee"
-        android:backgroundTint="#00ACC1"
-        android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Footer Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:menu="@menu/footer_menu"
+        app:itemIconTint="@color/selector_bottom_nav"
+        app:itemTextColor="@color/selector_bottom_nav"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RCM</string>
+    <string name="hours_worked">Hours Worked: %1$02d:%2$02d Hrs</string>
 </resources>

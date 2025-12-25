@@ -25,6 +25,13 @@ data class Employee(
     val aadhaarNumber: String,
     val bankName: String,
     val bankAccountNumber: String,
-    val ifscCode: String
+    val ifscCode: String,
+    val photoUrl: String? = null,
+
+    val workingDays: Int? = null,
+    val presentDays: Int? = null,
+    val absentDays: Int? = null,
+    val privilegeLeaves: Int? = null,
+    val optionalLeaves: Int? = null
 
 ) : Serializable
