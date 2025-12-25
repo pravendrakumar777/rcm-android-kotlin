@@ -17,12 +17,12 @@ object RetrofitClient {
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
 
-    val apiService: ApiService by lazy {
+    val apiService: ExternalAPIService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ApiService::class.java)
+            .create(ExternalAPIService::class.java)
     }
 }
