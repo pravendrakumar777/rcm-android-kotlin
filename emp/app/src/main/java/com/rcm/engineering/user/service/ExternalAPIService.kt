@@ -50,4 +50,12 @@ interface ExternalAPIService {
     @GET("/api/challan/download/{id}")
     @Streaming
     fun downloadChallan(@Path("id") id: Long): Call<ResponseBody>
+
+    @GET("/api/challan/download/excel/{id}")
+    @Streaming
+    fun downloadExcelChallan(@Path("id") id: Long): Call<ResponseBody>
+
+    @GET("/api/challan/download/csv/{id}")
+    @Streaming
+    fun downloadCSVChallan(@Path("id") id: Long): Call<ResponseBody>
 }

@@ -1,11 +1,17 @@
 package com.rcm.engineering.user.adapter
 
+import android.icu.text.NumberFormat
 import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.rcm.engineering.user.databinding.ItemChallanBinding
+import com.rcm.engineering.user.databinding.ItemChallanItemBinding
 import com.rcm.engineering.user.models.Challan
+import com.rcm.engineering.user.models.ChallanItem
 import java.util.Locale
 
 class ChallanAdapter(
@@ -39,6 +45,48 @@ class ChallanAdapter(
         holder.binding.btnExcel.setOnClickListener { btnExcel(challan) }
         holder.binding.btnCSV.setOnClickListener { btnCSV(challan) }
 
+
+        // View Button
+        holder.binding.btnView.setOnClickListener {
+            if (holder.binding.layoutItems.visibility == View.GONE) {
+                // Expand with animation
+                holder.binding.layoutItems.apply {
+                    visibility = View.VISIBLE
+                    alpha = 0f
+                    animate().alpha(1f).setDuration(300).start()
+                }
+                populateItems(holder.binding.itemsContainer, challan.items, holder.binding.tvTotalAmount)
+            } else {
+                // Collapse with animation
+                holder.binding.layoutItems.animate()
+                    .alpha(0f)
+                    .setDuration(200)
+                    .withEndAction {
+                        holder.binding.layoutItems.visibility = View.GONE
+                        holder.binding.itemsContainer.removeAllViews()
+                    }
+                    .start()
+            }
+        }
+    }
+
+    private fun populateItems(container: LinearLayout, items: List<ChallanItem>, totalView: TextView) {
+        container.removeAllViews()
+        val inflater = LayoutInflater.from(container.context)
+
+        var totalAmount = 0.0
+        for (item in items) {
+            val binding = ItemChallanItemBinding.inflate(inflater, container, false)
+            binding.tvDescription.text = item.description
+            binding.tvQuantity.text = item.quantity.toString()
+            binding.tvRate.text = item.ratePerPiece.toString()
+            binding.tvAmount.text = "₹ ${item.totalAmount}"
+
+            totalAmount += item.totalAmount
+            container.addView(binding.root)
+        }
+        val formatter = NumberFormat.getCurrencyInstance(Locale("en", "IN"))
+        totalView.text = formatter.format(totalAmount)
     }
 
     private fun formatDate(dateString: String): String {
