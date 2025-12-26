@@ -1,8 +1,10 @@
 package com.rcm.engineering.user.activities
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,11 +42,11 @@ class ChallanListActivity : AppCompatActivity() {
             },
             btnExcel = {
                 challan ->
-                Log.d("ChallanList", "Excel download: ${challan.challanNo}")
+                downloadExcel(challan.id)
             },
             btnCSV = {
                 challan ->
-                Log.d("ChallanList", "CSV download: ${challan.challanNo}")
+                downloadCsv(challan.id)
             }
         )
 
@@ -66,6 +68,7 @@ class ChallanListActivity : AppCompatActivity() {
         })
     }
 
+    // download challan pdf
     private fun downloadPdf(challanId: Long) {
         RetrofitClient.apiService.downloadChallan(challanId).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
@@ -104,5 +107,92 @@ class ChallanListActivity : AppCompatActivity() {
             flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
         }
         startActivity(intent)
+    }
+
+    // download challan excel
+    private fun downloadExcel(challanId: Long) {
+        RetrofitClient.apiService.downloadExcelChallan(challanId).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { body ->
+                        try {
+                            val file = File(getExternalFilesDir(null), "challan_$challanId.xlsx")
+                            body.byteStream().use { input ->
+                                FileOutputStream(file).use { output ->
+                                    input.copyTo(output)
+                                }
+                            }
+                            openExcel(file)
+                        } catch (e: Exception) {
+                            Log.e("EXCEL_ERROR", "Failed to save EXCEL", e)
+                        }
+                    }
+                } else {
+                    Log.e("EXCEL_ERROR", "Response not successful")
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("EXCEL_ERROR", "Download failed", t)
+            }
+        })
+    }
+
+    private fun openExcel(file: File) {
+        val uri = FileProvider.getUriForFile(
+            this,
+            "${packageName}.provider",
+            file
+        )
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        }
+        startActivity(intent)
+    }
+
+    // download CSV
+    private fun downloadCsv(challanId: Long) {
+        RetrofitClient.apiService.downloadCSVChallan(challanId).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { body ->
+                        try {
+                            val file = File(getExternalFilesDir(null), "challan_$challanId.csv")
+                            body.byteStream().use { input ->
+                                FileOutputStream(file).use { output ->
+                                    input.copyTo(output)
+                                }
+                            }
+                            openCsv(file)
+                        } catch (e: Exception) {
+                            Log.e("CSV_ERROR", "Failed to save CSV", e)
+                        }
+                    }
+                } else {
+                    Log.e("CSV_ERROR", "Response not successful")
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("CSV_ERROR", "Download failed", t)
+            }
+        })
+    }
+
+    private fun openCsv(file: File) {
+        val uri = FileProvider.getUriForFile(
+            this,
+            "${packageName}.provider",
+            file
+        )
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "text/csv")
+            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+        }
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "No app found to open CSV files", Toast.LENGTH_LONG).show()
+        }
     }
 }

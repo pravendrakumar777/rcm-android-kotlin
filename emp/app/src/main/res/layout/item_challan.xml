@@ -145,5 +145,89 @@
                 android:backgroundTint="#0277BD"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
+
+        <!-- Expandable Items Section -->
+        <LinearLayout
+            android:id="@+id/layoutItems"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingTop="8dp">
+
+            <!-- Static Header Row -->
+            <LinearLayout
+                android:id="@+id/itemsHeader"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:text="Description"
+                    android:textStyle="bold"
+                    android:textColor="#424242"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:text="Qty"
+                    android:textStyle="bold"
+                    android:textColor="#424242"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="Rate"
+                    android:textStyle="bold"
+                    android:textColor="#424242"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="Amount"
+                    android:textStyle="bold"
+                    android:textColor="#424242"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <!-- Dynamic Item Rows -->
+            <LinearLayout
+                android:id="@+id/itemsContainer"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!-- Total Row (aligned under Amount column) -->
+            <LinearLayout
+                android:id="@+id/itemsTotalRow"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp">
+
+                <!-- Spacer for Description + Qty + Rate -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4" />
+
+                <!-- Total Amount -->
+                <TextView
+                    android:id="@+id/tvTotalAmount"
+                    android:text="Total Amount: ₹0.00"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:gravity="end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
