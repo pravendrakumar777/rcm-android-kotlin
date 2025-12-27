@@ -78,7 +78,7 @@ class ChallanAdapter(
         for (item in items) {
             val binding = ItemChallanItemBinding.inflate(inflater, container, false)
             binding.tvDescription.text = item.description
-            binding.tvQuantity.text = item.quantity.toString()
+            binding.tvWeight.text = item.weight
             binding.tvRate.text = item.ratePerPiece.toString()
             binding.tvAmount.text = "₹ ${item.totalAmount}"
 
