@@ -27,7 +27,6 @@ data class Employee(
     val bankAccountNumber: String,
     val ifscCode: String,
     val photoUrl: String? = null,
-
     val workingDays: Int? = null,
     val presentDays: Int? = null,
     val absentDays: Int? = null,
