@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Employee Profile"
+        app:titleCentered="true"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@android:color/white"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:stretchColumns="1">
+
+                <TableRow>
+                    <TextView
+                        android:text="Name :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textName"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="EMP CODE :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textCode"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Email :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textEmail"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Mobile :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textMobile"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Dept :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textDepartment"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Desig :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textDesignation"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Manager :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textManager"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="DOB :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textDob"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="DOJ :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textDoj"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Aadhaar :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textAadhaar"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="City :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textCity"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="State :"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/textState"/>
+                </TableRow>
+
+            </TableLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

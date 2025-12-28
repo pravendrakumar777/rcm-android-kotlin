@@ -3,6 +3,7 @@ package com.rcm.engineering.user.adapter
 import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rcm.engineering.user.databinding.ItemEmployeeBinding
 import com.rcm.engineering.user.models.Employee
@@ -14,10 +15,25 @@ class EmployeeAdapter(
     private val onDelete: (Employee) -> Unit
 ) : RecyclerView.Adapter<EmployeeAdapter.UserViewHolder>() {
 
+    private var fullList: MutableList<Employee> = mutableListOf()
     fun setList(newList: List<Employee>) {
         list.clear()
         list.addAll(newList)
         notifyDataSetChanged()
+    }
+
+
+    fun filter(query: String) {
+        val filtered = if (query.isEmpty()) {
+            fullList
+        } else {
+            fullList.filter { it.name.contains(query, ignoreCase = true) }.toMutableList()
+        }
+
+        val diffResult = DiffUtil.calculateDiff(EmployeeDiffCallback(list, filtered))
+        list.clear()
+        list.addAll(filtered)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -42,11 +58,6 @@ class EmployeeAdapter(
         holder.binding.tvCity.text = user.city
         holder.binding.tvState.text = user.state
         holder.binding.tvCountry.text = user.country
-        //holder.binding.tvPanNumber.text = user.panNumber
-        //holder.binding.tvAadhaarNumber.text = user.aadhaarNumber
-        //holder.binding.tvBankName.text = user.bankName
-        //holder.binding.tvBankAccountNumber.text = user.bankAccountNumber
-        //holder.binding.tvIfscCode.text = user.ifscCode
 
         holder.binding.btn.setOnClickListener { on(user) }
         holder.binding.btnDelete.setOnClickListener { onDelete(user) }
@@ -67,4 +78,19 @@ class EmployeeAdapter(
 
     inner class UserViewHolder(val binding: ItemEmployeeBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    class EmployeeDiffCallback(
+        private val oldList: List<Employee>,
+        private val newList: List<Employee> ) : DiffUtil.Callback() {
+
+        override fun getOldListSize() = oldList.size
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition].id == newList[newItemPosition].id
+        }
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldList[oldItemPosition] == newList[newItemPosition]
+        }
+    }
 }

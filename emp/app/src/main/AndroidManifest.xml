@@ -27,6 +27,9 @@
         <activity android:name=".activities.AttendanceActivity"/>
         <activity android:name="com.rcm.engineering.user.activities.DashboardActivity"/>
         <activity android:name="com.rcm.engineering.user.activities.ChallanListActivity"/>
+        <activity android:name="com.rcm.engineering.user.activities.ProfilesActivity"
+            android:theme="@style/RCM"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

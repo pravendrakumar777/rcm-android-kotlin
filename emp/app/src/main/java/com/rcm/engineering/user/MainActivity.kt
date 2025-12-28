@@ -11,7 +11,7 @@ import com.rcm.engineering.user.activities.AttendanceActivity
 import com.rcm.engineering.user.activities.ChallanListActivity
 import com.rcm.engineering.user.activities.CreateEmployeeActivity
 import com.rcm.engineering.user.activities.DashboardActivity
-import com.rcm.engineering.user.activities.SettingsActivity
+import com.rcm.engineering.user.activities.ProfilesActivity
 import com.rcm.engineering.user.adapter.EmployeeAdapter
 import com.rcm.engineering.user.databinding.ActivityMainBinding
 import com.rcm.engineering.user.models.Employee
@@ -89,8 +89,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, SettingsActivity::class.java))
+                    startActivity(Intent(this, ProfilesActivity::class.java))
                     true
                 }
                 else -> false
