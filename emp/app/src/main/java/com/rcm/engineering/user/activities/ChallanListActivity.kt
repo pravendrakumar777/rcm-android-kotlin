@@ -70,7 +70,7 @@ class ChallanListActivity : AppCompatActivity() {
 
     // download challan pdf
     private fun downloadPdf(challanId: Long) {
-        RetrofitClient.apiService.downloadChallan(challanId).enqueue(object : Callback<ResponseBody> {
+        RetrofitClient.apiService.downloadPDFChallan(challanId).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
                     response.body()?.let { body ->

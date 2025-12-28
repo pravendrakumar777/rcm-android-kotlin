@@ -35,6 +35,7 @@ class AttendanceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAttendanceBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.btnBack.setOnClickListener { finish() }
 
         binding.btnCheckout.isEnabled = false
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
@@ -135,9 +136,31 @@ class AttendanceActivity : AppCompatActivity() {
         )
 
         call.enqueue(object : Callback<AttendanceResponse> {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(call: Call<AttendanceResponse>, response: Response<AttendanceResponse>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@AttendanceActivity, "Marked: ${response.body()?.status}", Toast.LENGTH_SHORT).show()
+                    val body = response.body()
+                    val checkInApi = body?.checkIn?.let {
+                        LocalDateTime.parse(it, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+                    }
+                    val checkOutApi = body?.checkOut?.let {
+                        LocalDateTime.parse(it, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
+                    }
+
+                    // Update UI with API times
+                    if (checkInApi != null) {
+                        binding.tvLastCheckIn.text = "Last Check-In: ${formatTime(checkInApi)}"
+                    }
+                    if (checkOutApi != null) {
+                        binding.tvLastCheckOut.text = "Last Check-Out: ${formatTime(checkOutApi)}"
+                        val diff = Duration.between(checkInApi, checkOutApi)
+                        binding.tvHoursWorked.text =
+                            "Hours Worked: %02d:%02d Hrs".format(diff.toHours(), diff.toMinutes() % 60)
+                    } else {
+                        binding.tvHoursWorked.text = "Hours Worked: 00:00 Hrs"
+                    }
+
+                    Toast.makeText(this@AttendanceActivity, "Marked: ${body?.status}", Toast.LENGTH_SHORT).show()
                 } else {
                     handleError(response.code())
                 }
@@ -148,6 +171,7 @@ class AttendanceActivity : AppCompatActivity() {
             }
         })
     }
+
 
     private fun handleError(code: Int) {
         val message = when (code) {
@@ -170,8 +194,8 @@ class AttendanceActivity : AppCompatActivity() {
         } else {
             val (checkIn, checkOut) = state
             if (checkIn != null && checkOut == null) {
-                binding.tvLastCheckIn.text = "Last Check-In: ${formatTime(checkIn)}"
-                binding.tvLastCheckOut.text = "Last Check-Out: N/A"
+                binding.tvLastCheckIn.text = "Check-In Time: ${formatTime(checkIn)}"
+                binding.tvLastCheckOut.text = "Check-Out Time: N/A"
                 binding.tvHoursWorked.text = "Hours Worked: 00:00 Hrs"
                 setAttendanceState(true)
             } else if (checkIn != null && checkOut != null) {
