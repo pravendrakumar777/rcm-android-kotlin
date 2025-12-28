@@ -23,16 +23,13 @@ class ProfilesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.toolbar.setNavigationOnClickListener { finish() }
-
         val adapter = ArrayAdapter<String>(
             this,
             android.R.layout.simple_dropdown_item_1line,
             mutableListOf()
         )
         binding.searchAutoComplete.setAdapter(adapter)
-
         binding.searchAutoComplete.setOnItemClickListener { _, _, position, _ ->
             val selectedName = adapter.getItem(position)
             val employee = employees.find { it.name == selectedName || it.empCode == selectedName }
@@ -70,7 +67,6 @@ class ProfilesActivity : AppCompatActivity() {
         }
     }
 
-
     private fun bindEmployee(employee: Employee) {
         binding.textName.text = employee.name
         binding.textEmail.text = employee.email
@@ -78,11 +74,11 @@ class ProfilesActivity : AppCompatActivity() {
         binding.textMobile.text = employee.mobile
         binding.textDepartment.text = employee.department
         binding.textDesignation.text = employee.designation
-        binding.textManager.text = employee.manager
-        binding.textDob.text = employee.dateOfBirth
-        binding.textDoj.text = employee.dateOfJoining
-        binding.textAadhaar.text = employee.aadhaarNumber
+        //binding.textManager.text = employee.manager
+        //binding.textDob.text = employee.dateOfBirth
+        //binding.textDoj.text = employee.dateOfJoining
+        //binding.textAadhaar.text = employee.aadhaarNumber
         binding.textCity.text = employee.city
-        binding.textState.text = employee.state
+        //binding.textState.text = employee.state
     }
 }
