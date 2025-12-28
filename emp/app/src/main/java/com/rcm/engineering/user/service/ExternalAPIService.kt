@@ -18,7 +18,7 @@ import retrofit2.http.Streaming
 
 interface ExternalAPIService {
 
-    // CREATE USER
+    // CREATE EMPLOYEE
     @POST("/api/employees/create")
     suspend fun createEmployee(@Body employee: Employee): Employee
 
@@ -28,6 +28,9 @@ interface ExternalAPIService {
     @GET("api/employees/list")
     suspend fun fetchAllEmployee(): Response<List<Employee>>
 
+    @GET("api/employees/search")
+    suspend fun searchEmployee(@Query("query") query: String): Response<Employee>
+
     @DELETE("/api/employees/delete/{id}")
     suspend fun deleteEmployee(@Path("id") id: Long): String
 
@@ -36,6 +39,9 @@ interface ExternalAPIService {
 
     @POST("/api/attendance/mark/{empCode}")
     fun markAttendance(@Query("empCode") empCode: String, @Query("date") date: String, @Query("status") status: String, @Query("checkInDateTime") checkInDateTime: String?, @Query("checkOutDateTime") checkOutDateTime: String?): Call<AttendanceResponse>
+
+    @GET("/api/attendance/{empCode}")
+    fun getAttendance(@Path("empCode") empCode: String, @Query("date") date: String): Call<AttendanceResponse>
 
     @GET("/api/attendance/{empCode}")
     suspend fun getAttendanceForEmployee(@Path("empCode") empCode: String): Response<AttendanceResponse>
@@ -49,7 +55,7 @@ interface ExternalAPIService {
 
     @GET("/api/challan/download/{id}")
     @Streaming
-    fun downloadChallan(@Path("id") id: Long): Call<ResponseBody>
+    fun downloadPDFChallan(@Path("id") id: Long): Call<ResponseBody>
 
     @GET("/api/challan/download/excel/{id}")
     @Streaming

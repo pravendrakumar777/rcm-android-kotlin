@@ -1,6 +1,9 @@
 package com.rcm.engineering.user.activities
 
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +14,9 @@ import com.rcm.engineering.user.service.RetrofitClient
 import kotlinx.coroutines.launch
 
 class ProfilesActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityProfileBinding
+    private var employees: List<Employee> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.RCM)
@@ -19,33 +24,52 @@ class ProfilesActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbar.setNavigationOnClickListener {
-            finish()
+        binding.toolbar.setNavigationOnClickListener { finish() }
+
+        val adapter = ArrayAdapter<String>(
+            this,
+            android.R.layout.simple_dropdown_item_1line,
+            mutableListOf()
+        )
+        binding.searchAutoComplete.setAdapter(adapter)
+
+        binding.searchAutoComplete.setOnItemClickListener { _, _, position, _ ->
+            val selectedName = adapter.getItem(position)
+            val employee = employees.find { it.name == selectedName || it.empCode == selectedName }
+            employee?.let { bindEmployee(it) }
         }
 
-        // Fetch from API
-        lifecycleScope.launch {
-            try {
-                val response = RetrofitClient.apiService.fetchAllEmployee()
-                if (response.isSuccessful) {
-                    val employees: List<Employee> = response.body() ?: emptyList()
-                    if (employees.isNotEmpty()) {
-                        val employee = employees.first()
-                        bindEmployee(employee)
-                    } else {
-                        Toast.makeText(this@ProfilesActivity, "No employees found", Toast.LENGTH_SHORT).show()
-                        finish()
-                    }
-                } else {
-                    Toast.makeText(this@ProfilesActivity, "Failed to fetch employees", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-            } catch (e: Exception) {
-                Toast.makeText(this@ProfilesActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                finish()
+        binding.buttonSearch.setOnClickListener {
+            val query = binding.searchAutoComplete.text.toString().trim()
+            if (query.isNotEmpty()) {
+                fetchEmployee(query)
+            } else {
+                Toast.makeText(this, "enter empCode ", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    private fun fetchEmployee(query: String) {
+        lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.apiService.searchEmployee(query)
+                if (response.isSuccessful) {
+                    val employee = response.body()
+                    if (employee != null) {
+                        bindEmployee(employee)
+                        binding.cardEmployee.visibility = View.VISIBLE
+                    } else {
+                        Toast.makeText(this@ProfilesActivity, "Employee not found", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this@ProfilesActivity, "Search failed", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@ProfilesActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     private fun bindEmployee(employee: Employee) {
         binding.textName.text = employee.name
