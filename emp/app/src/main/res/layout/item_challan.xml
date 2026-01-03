@@ -61,7 +61,43 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <!-- Customer Name -->
+        <!-- Date -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Issued Date : "
+                android:textStyle="bold"
+                android:textColor="#424242"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvDate"
+                android:textColor="#757575"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Last Modified Date -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="Last Modified Date : "
+                android:textStyle="bold"
+                android:textColor="#424242"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvLastModifiedDate"
+                android:textColor="#757575"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Vendor Partner’s -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -75,24 +111,6 @@
             <TextView
                 android:id="@+id/tvCustomerName"
                 android:textColor="#616161"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-        <!-- Date -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="Created Date : "
-                android:textStyle="bold"
-                android:textColor="#424242"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvDate"
-                android:textColor="#757575"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

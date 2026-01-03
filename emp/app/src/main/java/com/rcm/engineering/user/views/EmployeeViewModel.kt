@@ -50,7 +50,7 @@ class EmployeeViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val result = api.updateEmployee(empCode, employee)
-                responseMessage.postValue("Employee Updated: ${result.empCode}")
+                responseMessage.postValue("Employee Updated: ${result.ohr}")
                 fetchAllEmployees()
             } catch (e: Exception) {
                 error.postValue(e.message)

@@ -1,8 +1,8 @@
 package com.rcm.engineering.user.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,7 +32,7 @@ class ProfilesActivity : AppCompatActivity() {
         binding.searchAutoComplete.setAdapter(adapter)
         binding.searchAutoComplete.setOnItemClickListener { _, _, position, _ ->
             val selectedName = adapter.getItem(position)
-            val employee = employees.find { it.name == selectedName || it.empCode == selectedName }
+            val employee = employees.find { it.name == selectedName || it.ohr == selectedName }
             employee?.let { bindEmployee(it) }
         }
 
@@ -49,19 +49,29 @@ class ProfilesActivity : AppCompatActivity() {
     private fun fetchEmployee(query: String) {
         lifecycleScope.launch {
             try {
+                Log.d("ProfilesActivity", "fetchEmployee() called with query: $query")
+
                 val response = RetrofitClient.apiService.searchEmployee(query)
+                Log.d("ProfilesActivity", "Response received. isSuccessful=${response.isSuccessful}, code=${response.code()}")
+
                 if (response.isSuccessful) {
                     val employee = response.body()
+                    Log.d("ProfilesActivity", "Response body: $employee")
+
                     if (employee != null) {
+                        Log.i("ProfilesActivity", "Employee found: id=${employee.id}, name=${employee.name}")
                         bindEmployee(employee)
                         binding.cardEmployee.visibility = View.VISIBLE
                     } else {
+                        Log.w("ProfilesActivity", "Employee body is null for query=$query")
                         Toast.makeText(this@ProfilesActivity, "Employee not found", Toast.LENGTH_SHORT).show()
                     }
                 } else {
+                    Log.e("ProfilesActivity", "Search failed. HTTP ${response.code()} - ${response.message()}")
                     Toast.makeText(this@ProfilesActivity, "Search failed", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
+                Log.e("ProfilesActivity", "Exception in fetchEmployee(query=$query)", e)
                 Toast.makeText(this@ProfilesActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
@@ -70,15 +80,10 @@ class ProfilesActivity : AppCompatActivity() {
     private fun bindEmployee(employee: Employee) {
         binding.textName.text = employee.name
         binding.textEmail.text = employee.email
-        binding.textCode.text = employee.empCode
+        binding.textOhr.text = employee.ohr
         binding.textMobile.text = employee.mobile
         binding.textDepartment.text = employee.department
         binding.textDesignation.text = employee.designation
-        //binding.textManager.text = employee.manager
-        //binding.textDob.text = employee.dateOfBirth
-        //binding.textDoj.text = employee.dateOfJoining
-        //binding.textAadhaar.text = employee.aadhaarNumber
         binding.textCity.text = employee.city
-        //binding.textState.text = employee.state
     }
 }

@@ -4,13 +4,11 @@ import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rcm.engineering.user.databinding.ItemEmployeeBinding
 import com.rcm.engineering.user.models.Employee
 import java.util.Locale
-import com.rcm.engineering.user.R
 
 
 class EmployeeAdapter(
@@ -56,7 +54,7 @@ class EmployeeAdapter(
         holder.binding.tvManager.text = user.manager
         holder.binding.tvDob.text = formatDate(user.dateOfBirth)
         holder.binding.tvDateOfJoining.text = formatDate(user.dateOfJoining)
-        holder.binding.tvEmpCode.text = user.empCode
+        holder.binding.tvOhr.text = user.ohr
         holder.binding.tvSalary.text = user.salary
         holder.binding.tvCity.text = user.city
         holder.binding.tvState.text = user.state
@@ -72,14 +70,6 @@ class EmployeeAdapter(
                 holder.binding.layoutDetails.visibility = View.VISIBLE
             }
         }
-
-//        holder.binding.layoutHeader.setOnClickListener {
-//            val isVisible = holder.binding.layoutDetails.visibility == View.VISIBLE
-//            holder.binding.layoutDetails.visibility = if (isVisible) View.GONE else View.VISIBLE
-//            val animRes = if (isVisible) R.anim.collapse_anim else R.anim.expand_anim
-//            val animation = AnimationUtils.loadAnimation(holder.binding.root.context, animRes)
-//            holder.binding.layoutDetails.startAnimation(animation)
-//        }
     }
 
     private fun formatDate(dateString: String): String {

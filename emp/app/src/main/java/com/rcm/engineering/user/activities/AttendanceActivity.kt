@@ -27,7 +27,7 @@ import java.time.format.DateTimeFormatter
 class AttendanceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAttendanceBinding
     private val api = RetrofitClient.apiService
-    private var selectedEmpCode: String? = null
+    private var selectedOhr: String? = null
     private val attendanceState = mutableMapOf<String, Pair<LocalDateTime?, LocalDateTime?>>()
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -49,13 +49,13 @@ class AttendanceActivity : AppCompatActivity() {
         }
 
         binding.btnCheckin.setOnClickListener {
-            if (selectedEmpCode == null) {
+            if (selectedOhr == null) {
                 Toast.makeText(this, "Select employee first", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             val checkInTime = LocalDateTime.now()
-            attendanceState[selectedEmpCode!!] = Pair(checkInTime, null)
+            attendanceState[selectedOhr!!] = Pair(checkInTime, null)
             setAttendanceState(true)
             binding.tvLastCheckIn.text = "Last Check-In: ${formatTime(checkInTime)}"
             binding.tvHoursWorked.text = "Hours Worked: 00:00 Hrs"
@@ -63,12 +63,12 @@ class AttendanceActivity : AppCompatActivity() {
         }
 
         binding.btnCheckout.setOnClickListener {
-            if (selectedEmpCode == null) {
+            if (selectedOhr == null) {
                 Toast.makeText(this, "Select employee first", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val state = attendanceState[selectedEmpCode!!]
+            val state = attendanceState[selectedOhr!!]
             val checkInTime = state?.first
             if (checkInTime == null) {
                 Toast.makeText(this, "No check-in found for this employee", Toast.LENGTH_SHORT).show()
@@ -76,7 +76,7 @@ class AttendanceActivity : AppCompatActivity() {
             }
 
             val checkOutTime = LocalDateTime.now()
-            attendanceState[selectedEmpCode!!] = Pair(checkInTime, checkOutTime)
+            attendanceState[selectedOhr!!] = Pair(checkInTime, checkOutTime)
 
             setAttendanceState(false)
             binding.tvLastCheckOut.text = "Last Check-Out: ${formatTime(checkOutTime)}"
@@ -93,7 +93,7 @@ class AttendanceActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
-            employees.map { "${it.name} (${it.empCode})" }
+            employees.map { "${it.name} (${it.ohr})" }
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerEmployees.adapter = adapter
@@ -101,11 +101,11 @@ class AttendanceActivity : AppCompatActivity() {
         binding.spinnerEmployees.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                selectedEmpCode = employees[position].empCode
-                updateUIForEmployee(selectedEmpCode!!)
+                selectedOhr = employees[position].ohr
+                updateUIForEmployee(selectedOhr!!)
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                selectedEmpCode = null
+                selectedOhr = null
             }
         }
     }
@@ -128,7 +128,7 @@ class AttendanceActivity : AppCompatActivity() {
         val checkOutStr = checkOut?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))
 
         val call: Call<AttendanceResponse> = api.markAttendance(
-            empCode = selectedEmpCode!!,
+            ohr = selectedOhr!!,
             date = today,
             status = status,
             checkInDateTime = checkInStr,

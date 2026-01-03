@@ -15,7 +15,7 @@ data class Employee(
     val postalCode: String,
     val department: String,
     val designation: String,
-    val empCode: String,
+    val ohr: String,
     val salary: String,
     //
     val city: String,

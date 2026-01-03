@@ -11,5 +11,6 @@ data class ChallanItem(
     val totalAmount: Double,
     val process: String?,
     val hsnCode: String?,
-    val unit: String?
+    val unit: String?,
+    val addedOnModifiedDate: Boolean
 )
