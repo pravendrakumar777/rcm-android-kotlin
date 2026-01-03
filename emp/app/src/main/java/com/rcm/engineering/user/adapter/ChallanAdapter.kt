@@ -40,6 +40,7 @@ class ChallanAdapter(
         holder.binding.tvChallanRefNo.text = challan.refChNo
         holder.binding.tvCustomerName.text = challan.customerName
         holder.binding.tvDate.text = formatDate(challan.date)
+        holder.binding.tvLastModifiedDate.text = formatModifiedDate(challan)
         holder.binding.btnView.setOnClickListener { onView(challan) }
         holder.binding.btnPDF.setOnClickListener { btnPDF(challan) }
         holder.binding.btnExcel.setOnClickListener { btnExcel(challan) }
@@ -92,12 +93,30 @@ class ChallanAdapter(
     private fun formatDate(dateString: String): String {
         return try {
             val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
-            val output = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
+            val output = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.ENGLISH)
             output.format(input.parse(dateString)!!)
         } catch (e: Exception) {
             dateString
         }
     }
+
+    private fun formatModifiedDate(challan: Challan): String {
+        val hasModifiedItems = challan.items.any {
+            it.addedOnModifiedDate
+        }
+        return if (hasModifiedItems && !challan.modifiedDate.isNullOrBlank()) {
+            try {
+                val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+                val output = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.ENGLISH) // AM/PM
+                output.format(input.parse(challan.modifiedDate)!!)
+            } catch (ex: Exception) {
+                "NA"
+            }
+        } else {
+            "NA"
+        }
+    }
+
 
     override fun getItemCount(): Int = list.size
 

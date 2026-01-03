@@ -34,17 +34,17 @@ interface ExternalAPIService {
     @DELETE("/api/employees/delete/{id}")
     suspend fun deleteEmployee(@Path("id") id: Long): String
 
-    @PUT("/api/employees/update/{empCode}")
-    suspend fun updateEmployee(@Path("empCode") empCode: String, @Body employee: Employee): Employee
+    @PUT("/api/employees/update/{ohr}")
+    suspend fun updateEmployee(@Path("ohr") ohr: String, @Body employee: Employee): Employee
 
-    @POST("/api/attendance/mark/{empCode}")
-    fun markAttendance(@Query("empCode") empCode: String, @Query("date") date: String, @Query("status") status: String, @Query("checkInDateTime") checkInDateTime: String?, @Query("checkOutDateTime") checkOutDateTime: String?): Call<AttendanceResponse>
+    @POST("/api/attendance/mark/{ohr}")
+    fun markAttendance(@Query("ohr") ohr: String, @Query("date") date: String, @Query("status") status: String, @Query("checkInDateTime") checkInDateTime: String?, @Query("checkOutDateTime") checkOutDateTime: String?): Call<AttendanceResponse>
 
-    @GET("/api/attendance/{empCode}")
-    fun getAttendance(@Path("empCode") empCode: String, @Query("date") date: String): Call<AttendanceResponse>
+    @GET("/api/attendance/{ohr}")
+    fun getAttendance(@Path("ohr") ohr: String, @Query("date") date: String): Call<AttendanceResponse>
 
-    @GET("/api/attendance/{empCode}")
-    suspend fun getAttendanceForEmployee(@Path("empCode") empCode: String): Response<AttendanceResponse>
+    @GET("/api/attendance/{ohr}")
+    suspend fun getAttendanceForEmployee(@Path("ohr") ohr: String): Response<AttendanceResponse>
 
     @GET("/api/attendance/dashboard")
     suspend fun getDashboard(): Response<DashboardResponse>

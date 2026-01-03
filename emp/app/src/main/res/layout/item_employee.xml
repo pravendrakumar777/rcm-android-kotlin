@@ -58,7 +58,7 @@
                     android:textSize="15sp"/>
             </LinearLayout>
 
-            <!-- EMP CODE -->
+            <!-- OHR -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,14 +77,14 @@
                     android:id="@+id/labelEmpCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="EMP ID :"
+                    android:text="OHR :"
                     android:textStyle="bold"
                     android:textColor="#263238"
                     android:textSize="15sp"
                     android:layout_marginEnd="4dp"/>
 
                 <TextView
-                    android:id="@+id/tvEmpCode"
+                    android:id="@+id/tvOhr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -553,11 +553,9 @@
             </LinearLayout>
 
             <!-- ACTION BUTTONS -->
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="end"
                 android:layout_marginTop="12dp">
 
                 <Button
@@ -569,7 +567,8 @@
                     android:backgroundTint="#4CAF50"
                     android:textColor="#FFFFFF"
                     android:enabled="false"
-                    android:layout_marginEnd="8dp"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <Button
                     android:id="@+id/btnDelete"
@@ -580,8 +579,10 @@
                     android:backgroundTint="#E53935"
                     android:textColor="#FFFFFF"
                     android:enabled="false"
-                    android:alpha="0.5"/>
-            </LinearLayout>
+                    android:alpha="0.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

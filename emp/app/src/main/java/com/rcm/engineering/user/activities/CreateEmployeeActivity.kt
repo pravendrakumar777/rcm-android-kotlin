@@ -143,7 +143,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val empCode = ingEmployee?.empCode ?: ""
+            val ohr = ingEmployee?.ohr ?: ""
             val employee = Employee(
                 id = ingEmployee?.id,
                 name = name,
@@ -157,7 +157,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
                 postalCode = postalCode,
                 department = department,
                 designation = designation,
-                empCode = empCode,
+                ohr = ohr,
                 salary = salary,
                 city = city,
                 state = state,
@@ -170,7 +170,7 @@ class CreateEmployeeActivity : AppCompatActivity() {
             )
 
             if (ingEmployee == null) vm.createUser(employee)
-            else vm.updateEmployee(empCode, employee)
+            else vm.updateEmployee(ohr, employee)
 
             finish()
         }

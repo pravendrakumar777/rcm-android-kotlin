@@ -6,5 +6,6 @@ data class Challan(
     val refChNo: String?,
     val date: String,
     val customerName: String,
-    val items: List<ChallanItem>
+    val items: List<ChallanItem>,
+    val modifiedDate: String
 )
