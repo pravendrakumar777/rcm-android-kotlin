@@ -1,6 +1,8 @@
 package com.rcm.engineering.user.activities
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -85,5 +87,11 @@ class ProfilesActivity : AppCompatActivity() {
         binding.textDepartment.text = employee.department
         binding.textDesignation.text = employee.designation
         binding.textCity.text = employee.city
+
+        employee.photo?.let { base64String ->
+            val photoBytes = Base64.decode(base64String, Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
+            binding.imageProfile.setImageBitmap(bitmap)
+        }
     }
 }
