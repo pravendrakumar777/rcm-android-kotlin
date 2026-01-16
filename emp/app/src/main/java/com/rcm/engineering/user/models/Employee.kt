@@ -1,6 +1,8 @@
 package com.rcm.engineering.user.models
 
 import java.io.Serializable
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 data class Employee(
     val id: Long? = null,
@@ -33,4 +35,20 @@ data class Employee(
     val privilegeLeaves: Int? = null,
     val optionalLeaves: Int? = null
 
-) : Serializable
+) : Serializable {
+    val formattedDob: String
+        get() = formatDate(dateOfBirth)
+
+    val formattedJoining: String
+        get() = formatDate(dateOfJoining)
+
+    private fun formatDate(dateString: String): String {
+        return try {
+            val input = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val output = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            output.format(input.parse(dateString)!!)
+        } catch (e: Exception) {
+            dateString
+        }
+    }
+}

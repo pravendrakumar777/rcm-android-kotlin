@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F5F7FA">
 
+    <!-- Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,6 +17,7 @@
         app:navigationIcon="@drawable/ic_arrow_back"
         app:navigationIconTint="@android:color/white"/>
 
+    <!-- Scrollable content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,6 +29,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Search bar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,6 +70,7 @@
                     app:tint="@color/teal_700"/>
             </LinearLayout>
 
+            <!-- Employee card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardEmployee"
                 android:layout_width="match_parent"
@@ -82,16 +86,17 @@
                     android:padding="16dp"
                     android:gravity="center_horizontal">
 
-                    <ImageView
+                    <!-- ✅ Round profile image -->
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imageProfile"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@android:drawable/ic_menu_myplaces"
-                        android:scaleType="centerCrop"
                         android:layout_marginBottom="12dp"
-                        android:background="@drawable/circle_background"
-                        android:padding="8dp"/>
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_myplaces"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"/>
 
+                    <!-- Name -->
                     <TextView
                         android:id="@+id/textName"
                         android:layout_width="wrap_content"
@@ -102,6 +107,7 @@
                         android:textColor="@android:color/black"
                         android:layout_marginBottom="4dp"/>
 
+                    <!-- Designation -->
                     <TextView
                         android:id="@+id/textDesignation"
                         android:layout_width="wrap_content"
@@ -111,6 +117,35 @@
                         android:textColor="#555555"
                         android:layout_marginBottom="12dp"/>
 
+                    <!-- OHR -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="4dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@android:drawable/ic_lock_lock"
+                            app:tint="@color/teal_700"
+                            android:layout_marginEnd="8dp"/>
+
+                        <TextView
+                            android:text="OHR          :   "
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"/>
+
+                        <TextView
+                            android:id="@+id/textOhr"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <!-- Department -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -126,7 +161,7 @@
                             android:layout_marginEnd="8dp"/>
 
                         <TextView
-                            android:text="DEPT             : "
+                            android:text="DEPT        :   "
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -138,33 +173,7 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="4dp">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@android:drawable/ic_lock_lock"
-                        app:tint="@color/teal_700"
-                        android:layout_marginEnd="8dp"/>
-
-                        <TextView
-                            android:text="OHR              : "
-                            android:textStyle="bold"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="4dp"/>
-
-                        <TextView
-                            android:id="@+id/textOhr"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
+                    <!-- Email -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -180,7 +189,7 @@
                             android:layout_marginEnd="8dp"/>
 
                         <TextView
-                            android:text="EMAIL           : "
+                            android:text="EMAIL      :   "
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -192,6 +201,7 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
+                    <!-- Mobile -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -207,7 +217,7 @@
                             android:layout_marginEnd="8dp"/>
 
                         <TextView
-                            android:text="MOBILE        : "
+                            android:text="MOBILE    :   "
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -219,6 +229,7 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
+                    <!-- Region -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -234,7 +245,7 @@
                             android:layout_marginEnd="8dp"/>
 
                         <TextView
-                            android:text="REGION        : "
+                            android:text="REGION    :   "
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -246,6 +257,7 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
 
+                    <!-- Action buttons -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -281,16 +293,19 @@
                             android:textColor="@android:color/white"/>
                     </LinearLayout>
 
+                    <!-- Company link -->
                     <TextView
                         android:id="@+id/textCompany"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="rcm.engineering.com"
+                        android:text="http://rcm.engineering.com"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="#167C80"
                         android:gravity="end"
-                        android:layout_marginTop="8dp"/>
+                        android:layout_marginTop="8dp"
+                        android:autoLink="web"
+                        android:linksClickable="true"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

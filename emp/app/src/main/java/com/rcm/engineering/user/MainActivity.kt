@@ -2,6 +2,7 @@ package com.rcm.engineering.user
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,80 +26,76 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_EMPLOYEE = "extra_employee"
+        private const val TAG = "MainActivity"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate() called")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        vm = ViewModelProvider(this)[EmployeeViewModel::class.java]
 
+        vm = ViewModelProvider(this)[EmployeeViewModel::class.java]
+        Log.d(TAG, "EmployeeViewModel initialized")
+
+        // RecyclerView + Adapter setup
         adapter = EmployeeAdapter(
             mutableListOf(),
-            on = { open(it) },
-            onDelete = { vm.deleteEmployee(it.id!!) })
+            on = { employee -> open(employee) },
+            onDelete = { employee -> vm.deleteEmployee(employee.id!!) }
+        )
         binding.recycler.layoutManager = LinearLayoutManager(this)
         binding.recycler.adapter = adapter
 
+        // add new emp
         binding.fabAdd.setOnClickListener {
             startActivity(Intent(this, CreateEmployeeActivity::class.java))
         }
 
+        // Swipe refresh
         binding.swipeRefresh.setOnRefreshListener {
             vm.fetchAllEmployees()
             binding.swipeRefresh.isRefreshing = false
         }
 
+        // Observers
         vm.users.observe(this) { list ->
             adapter.setList(list)
             binding.tvEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-        }
-
-        binding.ivBack.setOnClickListener {
-            finish()
-        }
-
-        vm.error.observe(this) { err -> Toast.makeText(this, err, Toast.LENGTH_SHORT).show() }
-        vm.responseMessage.observe(this) { msg -> Toast.makeText(this, msg, Toast.LENGTH_SHORT).show() }
-
-        vm.users.observe(this) { list ->
-            adapter.setList(list)
-            binding.tvEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-
             binding.tvTotalEmployees.text = "Total Employees: ${list.size}"
         }
 
+        vm.error.observe(this) { err ->
+            Toast.makeText(this, err, Toast.LENGTH_SHORT).show()
+        }
+
+        vm.responseMessage.observe(this) { msg ->
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+
+        // Back button
         binding.ivBack.setOnClickListener { finish() }
 
-        vm.error.observe(this) { err -> Toast.makeText(this, err, Toast.LENGTH_SHORT).show() }
-        vm.responseMessage.observe(this) { msg -> Toast.makeText(this, msg, Toast.LENGTH_SHORT).show() }
-
+        // Bottom navigation
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_attendance -> {
-                    startActivity(Intent(this, AttendanceActivity::class.java))
-                    true
+                    startActivity(Intent(this, AttendanceActivity::class.java)); true
                 }
                 R.id.nav_dashboard -> {
-                    startActivity(Intent(this, DashboardActivity::class.java))
-                    true
+                    startActivity(Intent(this, DashboardActivity::class.java)); true
                 }
-
                 R.id.nav_reports -> {
-                    startActivity(Intent(this, ChallanListActivity::class.java))
-                    true
+                    startActivity(Intent(this, ChallanListActivity::class.java)); true
                 }
                 R.id.nav_profile -> {
-                    startActivity(Intent(this, ProfilesActivity::class.java))
-                    true
+                    startActivity(Intent(this, ProfilesActivity::class.java)); true
                 }
                 else -> false
             }
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
+        // Load employees
         vm.fetchAllEmployees()
     }
 

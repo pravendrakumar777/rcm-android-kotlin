@@ -1,6 +1,5 @@
 package com.rcm.engineering.user.adapter
 
-import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.rcm.engineering.user.databinding.ItemEmployeeBinding
 import com.rcm.engineering.user.models.Employee
-import java.util.Locale
-
 
 class EmployeeAdapter(
     private var list: MutableList<Employee>,
@@ -18,10 +15,15 @@ class EmployeeAdapter(
 ) : RecyclerView.Adapter<EmployeeAdapter.UserViewHolder>() {
 
     private var fullList: MutableList<Employee> = mutableListOf()
+
     fun setList(newList: List<Employee>) {
+        val diffResult = DiffUtil.calculateDiff(EmployeeDiffCallback(list, newList))
         list.clear()
         list.addAll(newList)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+
+        fullList.clear()
+        fullList.addAll(newList)
     }
 
     fun filter(query: String) {
@@ -52,8 +54,8 @@ class EmployeeAdapter(
         holder.binding.tvDepartment.text = user.department
         holder.binding.tvAddress.text = user.address
         holder.binding.tvManager.text = user.manager
-        holder.binding.tvDob.text = formatDate(user.dateOfBirth)
-        holder.binding.tvDateOfJoining.text = formatDate(user.dateOfJoining)
+        holder.binding.tvDob.text = user.formattedDob
+        holder.binding.tvDateOfJoining.text = user.formattedJoining
         holder.binding.tvOhr.text = user.ohr
         holder.binding.tvSalary.text = user.salary
         holder.binding.tvCity.text = user.city
@@ -71,17 +73,6 @@ class EmployeeAdapter(
             }
         }
     }
-
-    private fun formatDate(dateString: String): String {
-        return try {
-            val input = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val output = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            output.format(input.parse(dateString)!!)
-        } catch (e: Exception) {
-            dateString
-        }
-    }
-
 
     override fun getItemCount(): Int = list.size
 
