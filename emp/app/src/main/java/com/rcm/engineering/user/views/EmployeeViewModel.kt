@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rcm.engineering.user.models.Employee
 import com.rcm.engineering.user.service.RetrofitClient
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class EmployeeViewModel : ViewModel() {
@@ -16,19 +18,25 @@ class EmployeeViewModel : ViewModel() {
     private val api = RetrofitClient.apiService
 
     fun fetchAllEmployees() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response: Response<List<Employee>> = api.fetchAllEmployee()
                 if (response.isSuccessful) {
                     val list = response.body() ?: emptyList()
                     val sortedList = list.sortedByDescending { it.id }
-                    users.postValue(sortedList)
-                    //users.postValue(response.body() ?: sortedList)
+                    withContext(Dispatchers.Main) {
+                        users.value = sortedList
+                    }
+
                 } else {
-                    error.postValue("Error: ${response.code()}")
+                    withContext(Dispatchers.Main) {
+                        error.value = "Error: ${response.code()}"
+                    }
                 }
             } catch (e: Exception) {
-                error.postValue(e.message)
+                withContext(Dispatchers.Main) {
+                    error.value = e.message
+                }
             }
         }
     }
